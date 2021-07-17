@@ -9,11 +9,17 @@ class ApplicationsController < ApplicationController
   end
 
   def new
+    @application = Application.new
   end
 
   def create
-    application = Application.create!(application_params)
-    redirect_to "/applications/#{application.id}"
+    @application = Application.create(application_params)
+    if @application.save
+      flash[:notice] = "Application was completed successfully!"
+      redirect_to "/applications/#{@application.id}"
+    else
+      render 'new'
+    end
   end
 
   private
