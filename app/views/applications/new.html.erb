@@ -1,0 +1,17 @@
+<h1>New Application</h1>
+
+<%= form_with url: '/applications', local: true, method: :post do |f| %>
+  <%= f.label :name %>
+  <%= f.text_field :name, required: true, placeholder: 'Enter Full name' %>
+  <%= f.label :street_address %>
+  <%= f.text_field :street_address, required: true, placeholder: "1234 Main St." %>
+  <%= f.label :city %>
+  <%= f.text_field :city, required: true %>
+  <%= f.label :state %>
+  <%= f.text_field :state, required: true %>
+  <%= f.label :zip_code %>
+  <%= f.text_field :zip_code, required: true %>
+  <%= f.label :description %>
+  <%= f.text_area :description, label: 'Why do you want to adopt this pet?', required: true %>
+  <%= f.submit 'Submit' %>
+<% end %>
