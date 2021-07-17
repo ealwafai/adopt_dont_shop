@@ -3,9 +3,8 @@
 <p>Description: <%= @application.description %></p>
 <br>
 <p>Pets applied for:</p>
-  <ul>
-    <% @application.pets.each do |pet| %>
-      <li><a href="/pets/<%= pet.id %>"><%= pet.name %></a></li>
-    <% end %>
-  </ul>
+<% @application.pets.each do |pet| %>
+  <%= link_to pet.name, "/pets/#{pet.id}" %>
+<% end %>
+
 <p>Application status: In Progress</p>
