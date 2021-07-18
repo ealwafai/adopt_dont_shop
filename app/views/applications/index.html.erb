@@ -1,11 +1,21 @@
-<h1>All Applications</h1>
-
-<% @applications.each do |application| %>
-  <p><%= application.name %></p>
-  <p><%= application.street_address %></p>
-  <p><%=  application.city %></p>
-  <p><%=  application.state %></p>
-  <p><%=  application.zip_code %></p>
-  <p><%= application.description%></p>
-  <p><%= application.status%></p>
-<% end %>
+<h1 class="text-center mt-3">All Applications</h1>
+<br>
+<div class="container">
+  <% @applications.each do |application| %>
+  <div class="row justify-content-md-center">
+    <div class="col-8 mt-3">
+      <div class="card text-center shadow mb-5 bg-white rounded">
+        <div class="card-header">
+          <%= application.status%>
+        </div>
+        <div class="card-body">
+          <h5 class="card-title"><%= application.name %></h5>
+          <p class="card-text"><%= application.street_address %>, <%=   application.city %>, <%=  application.state %>, <%=  application.zip_code %>
+          </p>
+          <p class="card-text"><%= application.description%></p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <% end %>
+</div>
