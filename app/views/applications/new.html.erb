@@ -1,5 +1,6 @@
-<h1>New Application</h1>
-
+<div id="page-content">
+  <h1 class="text-center mt-4">New Application</h1>
+  <br>
 <% if @application.errors.any? %>
   <h2>The following errors prevented the application from being saved</h2>
   <ul>
@@ -9,18 +10,51 @@
   </ul>
 <% end %>
 
-<%= form_with url: '/applications', local: true, method: :post do |f| %>
-  <%= f.label :name %>
-  <%= f.text_field :name, placeholder: 'Enter Full name' %>
-  <%= f.label :street_address %>
-  <%= f.text_field :street_address, placeholder: "1234 Main St." %>
-  <%= f.label :city %>
-  <%= f.text_field :city %>
-  <%= f.label :state %>
-  <%= f.text_field :state %>
-  <%= f.label :zip_code %>
-  <%= f.text_field :zip_code %>
-  <%= f.label :description %>
-  <%= f.text_area :description %>
-  <%= f.submit 'Submit' %>
+  <%= form_with url: '/applications', local: true, method: :post do |f| %>
+<div class="form-group row">
+  <%= f.label :name, class: "col-2 col-form-label" %>
+  <div class="col-3">
+    <%= f.text_field :name, class: "form-control", placeholder: 'Enter Full name' %>
+  </div>
+</div>
+<br>
+<div class="form-group row">
+  <%= f.label :street_address, class: "col-2 col-form-label" %>
+  <div class="col-3">
+    <%= f.text_field :street_address, class: "form-control", placeholder: "1234 Main St." %>
+  </div>
+</div>
+<br>
+<div class="form-group row">
+    <%= f.label :city, class: "col-2 col-form-label" %>
+    <div class="col-2">
+    <%= f.text_field :city, class: "form-control" %>
+  </div>
+</div>
+<br>
+<div class="form-group row">
+    <%= f.label :state, class: "col-2 col-form-label" %>
+    <div class="col-2">
+    <%= f.text_field :state, class: "form-control" %>
+  </div>
+</div>
+<br>
+<div class="form-group row">
+    <%= f.label :zip_code, class: "col-2 col-form-label" %>
+    <div class="col-2">
+    <%= f.text_field :zip_code, class: "form-control" %>
+  </div>
+</div>
+<br>
+<div class="form-group row">
+    <%= f.label :description, class: "col-2 col-form-label" %>
+    <div class="col-10">
+    <%= f.text_area :description, rows: 5, class: "form-control" %>
+  </div>
+</div>
+<br>
+<div class="text-center mt-4">
+<%= f.submit 'Submit', class: "btn btn-primary btn-lg" %>
+</div>
+</div>
 <% end %>
