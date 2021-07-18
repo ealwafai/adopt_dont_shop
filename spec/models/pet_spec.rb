@@ -3,15 +3,15 @@ require 'rails_helper'
 RSpec.describe Pet, type: :model do
   describe 'relationships' do
     it { should belong_to(:shelter) }
-    it { should have_many :pet_applications}
+    it { should have_many(:pet_applications)}
     it { should have_many(:applications).through(:pet_applications)}
-
   end
 
   describe 'validations' do
     it { should validate_presence_of(:name) }
     it { should validate_presence_of(:age) }
     it { should validate_numericality_of(:age) }
+    it { should validate_presence_of(:breed) }
   end
 
   before(:each) do
@@ -33,12 +33,24 @@ RSpec.describe Pet, type: :model do
         expect(Pet.adoptable).to eq([@pet_1, @pet_2])
       end
     end
-  end
 
-  describe 'instance methods' do
-    describe '.shelter_name' do
-      it 'returns the shelter name for the given pet' do
-        expect(@pet_3.shelter_name).to eq(@shelter_1.name)
+    describe '#find_by_name' do
+      it 'returns pets with the same name' do
+        expect(Pet.find_by_name('Mr. Pirate')).to eq([@pet_1])
+        expect(Pet.find_by_name('Clawdia')).to eq([@pet_2])
+      end
+
+      it 'can return pets with a partial name in lower case' do
+        expect(Pet.find_by_name('pir')).to eq([@pet_1])
+        expect(Pet.find_by_name('cla')).to eq([@pet_2])
+      end
+    end
+
+    describe 'instance methods' do
+      describe '.shelter_name' do
+        it 'returns the shelter name for the given pet' do
+          expect(@pet_3.shelter_name).to eq(@shelter_1.name)
+        end
       end
     end
   end
