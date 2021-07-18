@@ -26,4 +26,5 @@ Rails.application.routes.draw do
 
   resources :applications, :pet_applications, :pets, :shelters
 
+  get '/admin/shelters', to: 'admin_shelters#index'
 end

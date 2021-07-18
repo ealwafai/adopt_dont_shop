@@ -16,7 +16,6 @@ class Pet < ApplicationRecord
   end
 
   def self.find_by_name(search)
-    require "pry"; binding.pry
     Pet.where('lower(name) LIKE ?', "%#{search.downcase}%")
   end
 end

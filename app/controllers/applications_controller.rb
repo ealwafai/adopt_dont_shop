@@ -5,11 +5,11 @@ class ApplicationsController < ApplicationController
   end
 
   def show
+    @application = Application.find(params[:id])
     if params[:search].present?
-      @application = Application.find(params[:id])
-      @pets = Pet.find_by_name(params[:search])
-    else
-      @application = Application.find(params[:id])
+      @application.pets = Pet.find_by_name(params[:search])
+    elsif params[:pet_id].present?
+      @application.pets << Pet.find(params[:pet_id])
     end
   end
 
@@ -18,7 +18,7 @@ class ApplicationsController < ApplicationController
   end
 
   def create
-    @application = Application.create(application_params)
+    @application = Application.create!(application_params)
     if @application.save
       flash[:notice] = "Application was completed successfully!"
       redirect_to "/applications/#{@application.id}"
@@ -30,6 +30,6 @@ class ApplicationsController < ApplicationController
   private
 
   def application_params
-    params.permit(:name, :street_address, :city, :state, :zip_code, :description)
+    params.permit(:name, :street_address, :city, :state, :zip_code, :description, :status)
   end
 end
