@@ -9,7 +9,7 @@
           <%= application.status%>
         </div>
         <div class="card-body">
-          <h5 class="card-title"><%= application.name %></h5>
+          <h5 class="card-title"><%= link_to application.name, "/applications/#{application.id}" %></h5>
           <p class="card-text"><%= application.street_address %>, <%=   application.city %>, <%=  application.state %>, <%=  application.zip_code %>
           </p>
           <p class="card-text"><%= application.description%></p>
