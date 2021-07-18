@@ -31,4 +31,8 @@ class Shelter < ApplicationRecord
   def shelter_pets_filtered_by_age(age_filter)
     adoptable_pets.where('age >= ?', age_filter)
   end
+
+  def self.shelters_in_reverse
+   find_by_sql('select * from shelters order by lower(name) desc')
+ end
 end
