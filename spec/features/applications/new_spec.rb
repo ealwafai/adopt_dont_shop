@@ -34,7 +34,7 @@ RSpec.describe 'user creates a new application' do
     expect(page).to have_content('Application was completed successfully!')
   end
 
-  it 'renders a new form if given data was invalid' do
+  it 'shows an error if given data was invalid' do
 
     visit '/applications/new'
 
