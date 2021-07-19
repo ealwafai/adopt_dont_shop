@@ -7,7 +7,7 @@ class ApplicationsController < ApplicationController
   def show
     @application = Application.find(params[:id])
     if params[:search].present?
-      @application.pets = Pet.find_by_name(params[:search])
+      @found_pets = Pet.find_by_name(params[:search])
     elsif params[:pet_id].present?
       @application.pets << Pet.find(params[:pet_id])
     end
@@ -18,13 +18,21 @@ class ApplicationsController < ApplicationController
   end
 
   def create
-    @application = Application.create!(application_params)
+    @application = Application.new(application_params)
     if @application.save
       flash[:notice] = "Application was completed successfully!"
       redirect_to "/applications/#{@application.id}"
     else
       render 'new'
     end
+  end
+
+  def update
+    application = Application.find(params[:id])
+    if params[:commit] == "Submit Application"
+      application.update!(description: params[:description], status: :pending)
+    end
+    redirect_to "/applications/#{application.id}"
   end
 
   private
