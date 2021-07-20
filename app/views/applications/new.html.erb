@@ -52,6 +52,9 @@
     <%= f.text_area :description, rows: 3, class: "form-control" %>
   </div>
 </div>
+<% f.label :status %>
+<%= f.hidden_field :status, value: 'In Progress' %>
+
 <br>
 <div class="text-center mt-4">
 <%= f.submit 'Submit', class: "btn btn-primary btn-lg" %>

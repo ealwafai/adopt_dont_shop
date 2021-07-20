@@ -28,11 +28,9 @@ class ApplicationsController < ApplicationController
   end
 
   def update
-    application = Application.find(params[:id])
-    if params[:commit] == "Submit Application"
-      application.update!(description: params[:description], status: :pending)
-    end
-    redirect_to "/applications/#{application.id}"
+    @application = Application.find(params[:id])
+    @application.update!(description: params[:description], status: :pending)
+    redirect_to "/applications/#{@application.id}?submit=true"
   end
 
   private
