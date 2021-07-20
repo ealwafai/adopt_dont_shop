@@ -1,26 +1,25 @@
+<section id="reversed">
 <h1 class="text-center mt-3">All Shelters</h1>
 <br>
-
 <div class="container">
   <% @reversed_shelters.each do |shelter| %>
   <div class="row justify-content-md-center">
     <div class="col-8 mt-3">
       <div class="card text-center shadow mb-5 bg-white rounded">
-        <div class="card-header">
-          "shelter-<% shelter.id %>"
-        </div>
         <div class="card-body">
-          <h5 class="card-title"><%= link_to shelter.name, "/admin/shelters/#{shelter.id}" %></h5>
+          <h5 class="card-title"><%= link_to "#{shelter.name}", "/admin/shelters/#{shelter.id}" %></h5>
         </div>
       </div>
     </div>
   </div>
   <% end %>
 </div>
+</section>
 
+<section id="pending">
 <div class="container">
   <h2>Shelters with Pending Applications</h2>
-  <% @shelters_pending_apps.each do |shelter| %>
+  <% @pending.each do |shelter| %>
   <div class="row justify-content-md-center">
     <div class="col-8 mt-3">
       <div class="card text-center shadow mb-5 bg-white rounded">
@@ -35,3 +34,4 @@
   </div>
   <% end %>
 </div>
+<section>
