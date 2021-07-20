@@ -57,7 +57,7 @@ RSpec.describe Shelter, type: :model do
     end
 
     describe '#shelters_pending_apps' do
-      it 'rednders shelters with pending apps' do
+      it 'orders shelters with pending apps' do
         expect(Shelter.shelters_pending_apps).to eq([@shelter_1])
       end
     end
