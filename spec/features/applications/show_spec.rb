@@ -86,7 +86,7 @@ RSpec.describe 'Application Show Page' do
 
       fill_in "search", with: pet.name
       click_on 'Search'
-      click_on "Adopt #{pet.name}"
+      click_on "Adopt: #{pet.name}"
 
       fill_in "description", with: "I love doggies"
 
@@ -106,33 +106,16 @@ RSpec.describe 'Application Show Page' do
 
       fill_in "search", with: pet.name
       click_on 'Search'
-      click_on "Adopt #{pet.name}"
+      click_on "Adopt: #{pet.name}"
 
       fill_in "description", with: "I love doggies"
       click_on "Submit Application"
 
       expect(current_path).to eq("/applications/#{application.id}")
-      expect(page).to have_content("Pending")
+      expect(page).to have_content("pending")
       expect(page).to have_content("Pets Applied For:")
       expect(page).to_not have_button('Submit')
       expect(page).to_not have_content("Add a Pet to this Application")
-    end
-
-    it 'will not desplay a text field to enter description if no pets are added to application' do
-      Pet.destroy_all
-      Shelter.destroy_all
-      Application.destroy_all
-
-      application = create(:application)
-      shelter = Shelter.create!(name: 'Aurora shelter', city: 'Aurora, CO', foster_program: true, rank: 9)
-      pet = application.pets.create!(name: 'Clyde', breed: "Bengal", age: 5, adoptable: true, shelter: shelter)
-
-      visit "/applications/#{application.id}"
-
-      fill_in "search", with: pet.name
-      click_on 'Search'
-
-      expect(page).to_not have_button("Submit Application")
     end
 
     it 'displays the added pets on page with partial name search and lower case' do
