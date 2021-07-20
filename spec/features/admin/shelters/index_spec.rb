@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Admin Shelter Index' do
+RSpec.describe 'Admin Shelters Index' do
 
   it 'lists all shelters, ordered in reverse by name' do
 
@@ -9,13 +9,14 @@ RSpec.describe 'Admin Shelter Index' do
     shelter_3 = Shelter.create(name: 'Fancy pets of Colorado', city: 'Denver, CO', foster_program: true, rank: 10)
 
     visit '/admin/shelters'
-
-    expect(page).to have_content 'All Shelters'
-    expect(shelter_2.name).to appear_before(shelter_3.name)
-    expect(shelter_3.name).to appear_before(shelter_1.name)
+    within('section#reversed') do
+      expect(page).to have_content('All Shelters')
+      expect(shelter_2.name).to appear_before(shelter_3.name)
+      expect(shelter_3.name).to appear_before(shelter_1.name)
+    end
   end
 
-  it 'lists shelters with pending applications ordered in reverse by name' do
+  it 'lists shelters with pending applications' do
     shelter_1 = Shelter.create(name: 'Aurora shelter', city: 'Aurora, CO', foster_program: false, rank: 9)
     shelter_2 = Shelter.create(name: 'RGV animal shelter', city: 'Harlingen, TX', foster_program: false, rank: 5)
     shelter_3 = Shelter.create(name: 'Fancy pets of Colorado', city: 'Denver, CO', foster_program: true, rank: 10)
@@ -29,11 +30,11 @@ RSpec.describe 'Admin Shelter Index' do
     app_3.pets.create!(name: 'Beans', breed: 'German Shepherd', age: 9, adoptable: true, shelter: shelter_3)
 
     visit '/admin/shelters'
-
-    expect(page).to have_content('Shelters with Pending Applications')
-    expect(page).to have_content('Aurora shelter')
-    expect(page).to have_content('Fancy pets of Colorado')
-    expect(page).to_not have_content('RGV animal shelter')
-    expect(shelter_1.name).to appear_before(shelter_3.name)
+    within('section#pending') do
+      expect(page).to have_content('Shelters with Pending Applications')
+      expect(page).to have_content('Aurora shelter')
+      expect(page).to have_content('Fancy pets of Colorado')
+      expect(page).to_not have_content('RGV animal shelter')
+    end
   end
 end
