@@ -31,7 +31,16 @@ RSpec.describe 'Admin Applications Show Page' do
 
 
   it 'admin sees an indicator next to the approved pet but sees no button to approve' do
+    click_button("Approve #{@pet_1.name}")
+    
     expect(page).to_not have_button("Approve #{@pet_1.name}")
-    expect(page).to have_content("Approved")
+    expect(page).to have_content("Approved!")
+  end
+
+  it 'admin sees an indicator next to the rejected pet but sees no button to reject' do
+    click_button("Reject #{@pet_1.name}")
+
+    expect(page).to_not have_button("Reject #{@pet_1.name}")
+    expect(page).to have_content("Rejected!")
   end
 end
