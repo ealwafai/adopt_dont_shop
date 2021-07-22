@@ -43,7 +43,7 @@
 <% if !params[:submit].present? %>
   <% if @application.pets.present? %>
     <%= form_with url: "/applications/#{@application.id}", method: :patch, local: true do |f| %>
-    <%= f.label :description, 'Would you like to update the why you would a good fit to adopt?' %>
+    <%= f.label :description, 'Would you like to update why you would a good fit to adopt?' %>
 <br>
 <br>
     <%= f.text_area :description, value: @application.description %>
