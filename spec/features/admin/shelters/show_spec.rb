@@ -4,7 +4,7 @@ require 'rails_helper'
    it 'displays shelter details' do
     shelter = Shelter.create(name: 'Aurora shelter', city: 'Aurora, CO', foster_program: false, rank: 9)
 
-    visit '/admin/shelters'
+    visit "/admin/shelters/#{shelter.id}"
 
     expect(page).to have_content(shelter.name)
    end
