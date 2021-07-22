@@ -17,8 +17,8 @@
 <% end %>
 
 <br>
-<% if !@found_pets.nil? %>
-<% @found_pets.each do |pet| %>
+<% if !@search_result.nil? %>
+<% @search_result.each do |pet| %>
 <h2>Name: <%= pet.name %></h2>
 <p>Age: <%= pet.age %></p>
 <p>Breed: <%= pet.breed %></p>
@@ -43,11 +43,11 @@
 <% if !params[:submit].present? %>
   <% if @application.pets.present? %>
     <%= form_with url: "/applications/#{@application.id}", method: :patch, local: true do |f| %>
-    <%= f.text_area :description, value: @application.description %>
-<br>
     <%= f.label :description, 'Would you like to update the why you would a good fit to adopt?' %>
 <br>
-    <%= f.label :status %>
+<br>
+    <%= f.text_area :description, value: @application.description %>
+<br>
 <br>
     <% f.hidden_field :status, value: 'Pending' %>
     <%= f.submit 'Submit Application' %>

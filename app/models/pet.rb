@@ -18,4 +18,16 @@ class Pet < ApplicationRecord
   def self.find_by_name(search)
     where('lower(name) LIKE ?', "%#{search.downcase}%")
   end
+
+  def pet_application_status(app_id)
+    PetApplication.find_apps(id, app_id).status
+  end
+
+  def approved?(app_id)
+    pet_application_status(app_id) == 'approved'
+  end
+
+  def rejected?(app_id)
+    pet_application_status(app_id) == 'rejected'
+  end
 end
