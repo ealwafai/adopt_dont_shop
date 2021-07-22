@@ -26,8 +26,6 @@ RSpec.describe 'the veterinarian update' do
       click_button 'Save'
 
       expect(page).to have_current_path("/pets/#{pet.id}")
-      expect(page).to have_content('Itchy')
-      expect(page).to_not have_content('Charlie')
     end
   end
 
